@@ -24,6 +24,9 @@ unordered_map < string, string > gHash = {
 { "#include", "#include" },
 { "typedef", "typedef" },
 { "int", "int" },
+{ "bool", "bool" },
+{ "void", "void" },
+{ "return", "return" },	
 { "{", "{" },
 { "if", "if" },
 { "}", "}" }
@@ -79,16 +82,15 @@ void readAndFixFile( char *filepath ) {
 				token = token + " " ;
 				string newToken = "struct " + token ;
 				line = regex_replace( line, regex( token ), newToken );
-				cout << line << endl ;
+				// cout << line << endl ;
 				MyFile << line ;
 				MyFile << "\n" ;
 			} // if
 		} // if
 		else {
-			cout << line << endl ;
+			// cout << line << endl ;
 			MyFile << line ;
 			MyFile << "\n" ;
-			// Myfile << line ;
 		} // else
 		
 		token = "" ;
