@@ -84,8 +84,8 @@ void readAndFixFile( char *filepath ) {
 				string newToken = "struct " + token ;
 				line = regex_replace( line, regex( token ), newToken );
 				cout << line << endl ;
-				// MyFile << line ;
-				// MyFile << "\n" ;
+				MyFile << line ;
+			        MyFile << "\n" ;
 			} // if
 		} // if
 		else {
@@ -105,11 +105,13 @@ void readAndFixFile( char *filepath ) {
         } // for
 
         cout << line << endl ;
+	MyFile << line ;
+	MyFile << "\n" ;
       } // if
       else {
         cout << line << endl ;
-        // MyFile << line ;
-        // MyFile << "\n" ;
+        MyFile << line ;
+        MyFile << "\n" ;
       } // else
 		} // else
 		

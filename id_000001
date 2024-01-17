@@ -1,0 +1,12 @@
+<HEADER> ID: 1, Parent: None,
+<0> load data_size: u32 = 8
+<1> call buf: nftnl_udata_buf_alloc (<0>, ) 
+<2> assert NonNull${ stmt: <1>,  }
+<3> load const buf: hopper::runtime::FuzzConstPointer<hopper_harness::nftnl_udata_buf> = const* <1>[&]
+<4> call attr: nftnl_udata_end (<3>, ) 
+<5> assert NonNull${ stmt: <4>,  }
+<6> load const attr: hopper::runtime::FuzzConstPointer<hopper_harness::nftnl_udata> = const* <4>[&]
+<7> call $target: nftnl_udata_type ? (<6>, ) 
+<END>
+<RNG> { state: 16649761851511995606, increment: 16269347566472270695,  }
+<FLAG> 2
