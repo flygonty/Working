@@ -35,6 +35,7 @@ unordered_map < string, string > gHash = {
 void readAndFixFile( char *filepath ) ;
 string getToken( ifstream &sourceCode ) ;
 bool isFunction( string token ) ;
+bool isIndirectCall( string line ) ;
 
 int main( int argc, char* argv[] ) {
   if ( argc > 2 ) {
@@ -82,15 +83,34 @@ void readAndFixFile( char *filepath ) {
 				token = token + " " ;
 				string newToken = "struct " + token ;
 				line = regex_replace( line, regex( token ), newToken );
-				// cout << line << endl ;
-				MyFile << line ;
-				MyFile << "\n" ;
+				cout << line << endl ;
+				// MyFile << line ;
+				// MyFile << "\n" ;
 			} // if
 		} // if
 		else {
-			// cout << line << endl ;
-			MyFile << line ;
-			MyFile << "\n" ;
+      // check the indirect call case
+      if ( isIndirectCall( line ) ) {
+        // indriect call case
+        // find the pos to insert 'struct'
+        bool indirect = false ;
+        for ( int i = 0 ; i < line.length() ; i++ ) {
+          if ( line[i] == ')' && line[i+1] == '(' ) {
+            indirect = true ;
+          } // if
+          if ( indirect ) {
+            line.insert( i+2, "struct " ) ;
+            indirect = false ;
+          } // if
+        } // for
+
+        cout << line << endl ;
+      } // if
+      else {
+        cout << line << endl ;
+        // MyFile << line ;
+        // MyFile << "\n" ;
+      } // else
 		} // else
 		
 		token = "" ;
@@ -112,5 +132,15 @@ bool isFunction( string token ) {
 
 
 
+bool isIndirectCall( string line ) {
+  int count = 0 ;
+  for ( int i = 0 ; i < line.length() ; i++ ) {
+    if ( line[i] == ')'  && line[i+1] == '(' ) {
+     return true ; 
+    } // if
+  } // for
 
+
+  return false ;
+} // isIndirectCall()
 
